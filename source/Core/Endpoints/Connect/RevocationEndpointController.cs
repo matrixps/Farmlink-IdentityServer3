@@ -104,26 +104,44 @@ namespace IdentityServer3.Core.Endpoints
                 return new RevocationErrorResult(requestResult.Error);
             }
 
-            // revoke tokens
-            if (requestResult.TokenTypeHint == Constants.TokenTypeHints.AccessToken)
+            // revoke tokens for subject
+            if (requestResult.Mode == TokenRevocationMode.Subject)
             {
-                await RevokeAccessTokenAsync(requestResult.Token, clientResult.Client);
+                await RevokeForSubject(requestResult.SubjectId, clientResult.Client);
+                return Ok();
             }
-            else if (requestResult.TokenTypeHint == Constants.TokenTypeHints.RefreshToken)
-            {
-                await RevokeRefreshTokenAsync(requestResult.Token, clientResult.Client);
-            }
-            else
-            {
-                var found = await RevokeAccessTokenAsync(requestResult.Token, clientResult.Client);
 
-                if (!found)
+            // revoke specific tokens
+            if (requestResult.Mode == TokenRevocationMode.Token)
+            {
+                if (requestResult.TokenTypeHint == Constants.TokenTypeHints.AccessToken)
+                {
+                    await RevokeAccessTokenAsync(requestResult.Token, clientResult.Client);
+                }
+                else if (requestResult.TokenTypeHint == Constants.TokenTypeHints.RefreshToken)
                 {
                     await RevokeRefreshTokenAsync(requestResult.Token, clientResult.Client);
+                }
+                else
+                {
+                    var found = await RevokeAccessTokenAsync(requestResult.Token, clientResult.Client);
+
+                    if (!found)
+                    {
+                        await RevokeRefreshTokenAsync(requestResult.Token, clientResult.Client);
+                    }
                 }
             }
 
             return Ok();
+        }
+
+        private async Task RevokeForSubject(string subjectId, Client client)
+        {
+            // should there be a per-client switch to allow this?
+
+            await _refreshTokens.RevokeAsync(subjectId, client.ClientId);
+            await _tokenHandles.RevokeAsync(subjectId, client.ClientId);
         }
 
         // revoke access token only if it belongs to client doing the request
