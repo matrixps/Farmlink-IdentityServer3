@@ -232,6 +232,7 @@
     <Compile Include="Validation\PlainTextSharedSecretValidator.cs" />
     <Compile Include="Validation\PostBodySecretParser.cs" />
     <Compile Include="Services\Default\UserServiceBase.cs" />
+    <Compile Include="Validation\TokenRevocationMode.cs" />
     <Compile Include="Validation\X509CertificateThumbprintSecretValidator.cs" />
     <Compile Include="Services\ICache.cs" />
     <Compile Include="Services\ICorsPolicyService.cs" />

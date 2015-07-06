@@ -39,26 +39,43 @@ namespace IdentityServer3.Core.Validation
             if (parameters == null) throw new ArgumentNullException("parameters");
             if (client == null) throw new ArgumentNullException("client");
 
+            var success = new TokenRevocationRequestValidationResult { IsError = false };
+            var fail = new TokenRevocationRequestValidationResult { IsError = true };
+            
             ////////////////////////////
-            // make sure token is present
+            // either token OR sub must be present
             ///////////////////////////
             var token = parameters.Get("token");
-            if (token.IsMissing())
+            var sub = parameters.Get("sub");
+
+            // both are missing
+            if (token.IsMissing() && sub.IsMissing())
             {
-                return Task.FromResult(new TokenRevocationRequestValidationResult
-                {
-                    IsError = true,
-                    Error = Constants.TokenErrors.InvalidRequest
-                });
+                fail.Error = Constants.TokenErrors.InvalidRequest;
+                return Task.FromResult(fail);
             }
 
-            var result = new TokenRevocationRequestValidationResult
+            // both are present
+            if (token.IsPresent() && sub.IsPresent())
             {
-                IsError = false,
-                Token = token
-            };
+                fail.Error = Constants.TokenErrors.InvalidRequest;
+                return Task.FromResult(fail);
+            }
 
+            if (sub.IsPresent())
+            {
+                success.Mode = TokenRevocationMode.Subject;
+                success.SubjectId = sub;
 
+                return Task.FromResult(success);
+            }
+
+            if (token.IsPresent())
+            {
+                success.Mode = TokenRevocationMode.Token;
+                success.Token = token;
+            }
+           
             ////////////////////////////
             // check token type hint
             ///////////////////////////
@@ -67,16 +84,16 @@ namespace IdentityServer3.Core.Validation
             {
                 if (Constants.SupportedTokenTypeHints.Contains(hint))
                 {
-                    result.TokenTypeHint = hint;
+                    success.TokenTypeHint = hint;
                 }
                 else
                 {
-                    result.IsError = true;
-                    result.Error = Constants.RevocationErrors.UnsupportedTokenType;
+                    fail.Error = Constants.RevocationErrors.UnsupportedTokenType;
+                    return Task.FromResult(fail);
                 }
             }
 
-            return Task.FromResult(result);
+            return Task.FromResult(success);
         }
     }
 }

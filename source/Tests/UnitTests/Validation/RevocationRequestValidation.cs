@@ -75,6 +75,62 @@ namespace IdentityServer3.Tests.Validation
 
         [Fact]
         [Trait("Category", Category)]
+        public async Task Both_Token_and_Subject()
+        {
+            var client = await _clients.FindClientByIdAsync("codeclient");
+
+            var parameters = new NameValueCollection
+            {
+                { "token", "access_token" },
+                { "sub", "sub" }
+            };
+
+            var result = await _validator.ValidateRequestAsync(parameters, client);
+
+            result.IsError.Should().BeTrue();
+            result.Error.Should().Be(Constants.TokenErrors.InvalidRequest);
+        }
+
+        [Fact]
+        [Trait("Category", Category)]
+        public async Task Valid_Token_And_No_Hint()
+        {
+            var client = await _clients.FindClientByIdAsync("codeclient");
+
+            var parameters = new NameValueCollection
+            {
+                { "token", "foo" },
+            };
+
+            var result = await _validator.ValidateRequestAsync(parameters, client);
+
+            result.IsError.Should().BeFalse();
+            result.Token.Should().Be("foo");
+            result.Mode.Should().Be(TokenRevocationMode.Token);
+            result.TokenTypeHint.Should().BeNull();
+        }
+
+        [Fact]
+        [Trait("Category", Category)]
+        public async Task Valid_Subject()
+        {
+            var client = await _clients.FindClientByIdAsync("codeclient");
+
+            var parameters = new NameValueCollection
+            {
+                { "sub", "foo" },
+            };
+
+            var result = await _validator.ValidateRequestAsync(parameters, client);
+
+            result.IsError.Should().BeFalse();
+            result.SubjectId.Should().Be("foo");
+            result.Mode.Should().Be(TokenRevocationMode.Subject);
+            result.TokenTypeHint.Should().BeNull();
+        }
+
+        [Fact]
+        [Trait("Category", Category)]
         public async Task Valid_Token_And_AccessTokenHint()
         {
             var client = await _clients.FindClientByIdAsync("codeclient");
@@ -89,6 +145,7 @@ namespace IdentityServer3.Tests.Validation
 
             result.IsError.Should().BeFalse();
             result.Token.Should().Be("foo");
+            result.Mode.Should().Be(TokenRevocationMode.Token);
             result.TokenTypeHint.Should().Be("access_token");
         }
 
@@ -108,25 +165,8 @@ namespace IdentityServer3.Tests.Validation
 
             result.IsError.Should().BeFalse();
             result.Token.Should().Be("foo");
+            result.Mode.Should().Be(TokenRevocationMode.Token);
             result.TokenTypeHint.Should().Be("refresh_token");
-        }
-
-        [Fact]
-        [Trait("Category", Category)]
-        public async Task Valid_Token_And_Missing_Hint()
-        {
-            var client = await _clients.FindClientByIdAsync("codeclient");
-
-            var parameters = new NameValueCollection
-            {
-                { "token", "foo" },
-            };
-
-            var result = await _validator.ValidateRequestAsync(parameters, client);
-
-            result.IsError.Should().BeFalse();
-            result.Token.Should().Be("foo");
-            result.TokenTypeHint.Should().BeNull();
         }
 
         [Fact]

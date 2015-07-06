@@ -16,12 +16,9 @@
 
 namespace IdentityServer3.Core.Validation
 {
-    internal class TokenRevocationRequestValidationResult : ValidationResult
+    internal enum TokenRevocationMode
     {
-        public string TokenTypeHint { get; set; }
-        public string Token { get; set; }
-
-        public TokenRevocationMode Mode { get; set; }
-        public string SubjectId { get; set; }
+        Token,
+        Subject
     }
 }
