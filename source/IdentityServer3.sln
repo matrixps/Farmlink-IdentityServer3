@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{FB9E026E-BAB3-498A-A954-B93B05C146A5}"
 EndProject
@@ -17,19 +17,40 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		matrix-dev|Any CPU = matrix-dev|Any CPU
+		matrix-stage|Any CPU = matrix-stage|Any CPU
+		matrix-test|Any CPU = matrix-test|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.matrix-dev|Any CPU.ActiveCfg = matrix-dev|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.matrix-dev|Any CPU.Build.0 = matrix-dev|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.matrix-stage|Any CPU.ActiveCfg = matrix-stage|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.matrix-stage|Any CPU.Build.0 = matrix-stage|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.matrix-test|Any CPU.ActiveCfg = matrix-test|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.matrix-test|Any CPU.Build.0 = matrix-test|Any CPU
 		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C41ECC23-BB27-4BDD-990E-4908B872F12C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C41ECC23-BB27-4BDD-990E-4908B872F12C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C41ECC23-BB27-4BDD-990E-4908B872F12C}.matrix-dev|Any CPU.ActiveCfg = matrix-dev|Any CPU
+		{C41ECC23-BB27-4BDD-990E-4908B872F12C}.matrix-dev|Any CPU.Build.0 = matrix-dev|Any CPU
+		{C41ECC23-BB27-4BDD-990E-4908B872F12C}.matrix-stage|Any CPU.ActiveCfg = matrix-stage|Any CPU
+		{C41ECC23-BB27-4BDD-990E-4908B872F12C}.matrix-stage|Any CPU.Build.0 = matrix-stage|Any CPU
+		{C41ECC23-BB27-4BDD-990E-4908B872F12C}.matrix-test|Any CPU.ActiveCfg = matrix-test|Any CPU
+		{C41ECC23-BB27-4BDD-990E-4908B872F12C}.matrix-test|Any CPU.Build.0 = matrix-test|Any CPU
 		{C41ECC23-BB27-4BDD-990E-4908B872F12C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C41ECC23-BB27-4BDD-990E-4908B872F12C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7EAD2E17-3ADA-4E9C-A2B9-5A7B9CC4C0EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7EAD2E17-3ADA-4E9C-A2B9-5A7B9CC4C0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EAD2E17-3ADA-4E9C-A2B9-5A7B9CC4C0EA}.matrix-dev|Any CPU.ActiveCfg = matrix-dev|Any CPU
+		{7EAD2E17-3ADA-4E9C-A2B9-5A7B9CC4C0EA}.matrix-dev|Any CPU.Build.0 = matrix-dev|Any CPU
+		{7EAD2E17-3ADA-4E9C-A2B9-5A7B9CC4C0EA}.matrix-stage|Any CPU.ActiveCfg = matrix-stage|Any CPU
+		{7EAD2E17-3ADA-4E9C-A2B9-5A7B9CC4C0EA}.matrix-stage|Any CPU.Build.0 = matrix-stage|Any CPU
+		{7EAD2E17-3ADA-4E9C-A2B9-5A7B9CC4C0EA}.matrix-test|Any CPU.ActiveCfg = matrix-test|Any CPU
+		{7EAD2E17-3ADA-4E9C-A2B9-5A7B9CC4C0EA}.matrix-test|Any CPU.Build.0 = matrix-test|Any CPU
 		{7EAD2E17-3ADA-4E9C-A2B9-5A7B9CC4C0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EAD2E17-3ADA-4E9C-A2B9-5A7B9CC4C0EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
