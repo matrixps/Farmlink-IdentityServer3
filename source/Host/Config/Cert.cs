@@ -23,6 +23,8 @@ namespace Thinktecture.IdentityServer.Host.Config
         public static X509Certificate2 Load()
         {
             var assembly = typeof(Cert).Assembly;
+            
+            //TODO:  Update this with Farmlink certificate
             using (var stream = assembly.GetManifestResourceStream("Thinktecture.IdentityServer.Host.Config.idsrv3test.pfx"))
             {
                 return new X509Certificate2(ReadStream(stream), "idsrv3test");
