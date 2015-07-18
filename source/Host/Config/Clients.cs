@@ -54,6 +54,18 @@ namespace Thinktecture.IdentityServer.Host.Config
                     AccessTokenType = AccessTokenType.Reference,
                 },
 
+                new Client{
+                    Enabled = true,
+                    Flow = Flows.ResourceOwner,
+                    ClientId = "tom",
+                    ClientName = "toms test",
+                    RequireConsent = false,
+
+                     ClientSecrets = new List<ClientSecret>
+                    { 
+                        new ClientSecret("secret".Sha256())
+                    },
+                },
                 new Client
                 {
                     ClientName = "Implicit Client Demo",
