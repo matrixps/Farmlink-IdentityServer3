@@ -95,7 +95,7 @@ publish/
 
 # Publish Web Output
 *.Publish.xml
-*.pubxml
+# *.pubxml
 !Local.pubxml
 
 # NuGet Packages Directory
